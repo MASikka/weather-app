@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const CityFromMongo = mongoose.model('City');
 const axios = require('axios');
-const API_KEY = 'a56f250648321a74c4d2f030726510f7';
+const config = require("dotenv").config();
 setInterval(updateWeather, 900000);
 
 exports.postCity = async (req, res) => {
     let { city } = req.body;
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.API_KEY}`;
     let newCity = new CityFromMongo();
     newCity.name = city.toUpperCase();
     axios.get(url)
@@ -69,7 +69,7 @@ function updateWeather() {
 }
 function updateCity(id, cityName) {
     let city = cityName;
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.API_KEY}`;
     axios.get(url)
         .then((response) => {
             let tempCelsius = (response.data.main.temp - 273, 15);
