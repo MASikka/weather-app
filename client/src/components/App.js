@@ -9,7 +9,7 @@ function App() {
   async function postCity(e) {
     e.preventDefault()
     try {
-      await axios.post("http://localhost:3001/post_city", { city })
+      await axios.post("/post_city", { city })
       setData(data)
     } catch (error) {
       console.log(error);

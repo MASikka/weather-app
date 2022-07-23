@@ -1,10 +1,9 @@
 import React from "react";
 import axios from "axios";
-import App from "./App";
 async function deleteCity(e) {
     e.preventDefault()
     try {
-      await axios.post("http://localhost:3001/delete_city", {id: e.target.value});
+      await axios.post("/delete_city", {id: e.target.value});
     } catch (error) {
       console.error(error);
     }
