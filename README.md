@@ -1,5 +1,4 @@
 # Weather App
-**
 A weather app done using Node.js for backend and React for frontend.
 Uses MongoDB and OpenWeather API.
 ## Features
