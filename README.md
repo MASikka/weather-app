@@ -1,6 +1,7 @@
 # Weather App
 A weather app done using Node.js for backend and React for frontend.
-Uses MongoDB and OpenWeather API.
+Uses MongoDB and OpenWeather API.  
+Heroku link: https://evening-inlet-76904.herokuapp.com/
 ## Features
 * Add cities to database to display weather
 * Remove cities to stop displaying weather
