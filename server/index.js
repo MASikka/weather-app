@@ -7,6 +7,7 @@ const mainRoute = require('./routes/main');
 const errorRoute = require('./routes/error');
 
 const app = express();
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors());
