@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const CityFromMongo = mongoose.model('City');
 const axios = require('axios');
 const config = require("dotenv").config();
-setInterval(updateWeather, 900000);
+setInterval(updateWeather, 900000); 
 
 exports.postCity = async (req, res) => {
     let { city } = req.body;
@@ -19,13 +19,17 @@ exports.postCity = async (req, res) => {
             newCity.save((error, response) => {
                 if (!error) {
                     console.log(response);
-                } else {
+                    res.send("");
+                }
+                else {
                     console.log(error);
+                    res.send("Error: " + error.response.data.message);
                 }
             });
         })
         .catch(error => {
-            console.log(error);
+            console.log(error.response.data.message);
+            res.send("Error: " + error.response.data.message);
         });
 
 };
@@ -54,8 +58,11 @@ exports.getCities = (req, res) => {
     });
 
 };
+exports.manualUpdate = (req, res) => {
+    updateWeather();
+};
 
-function updateWeather() {
+function updateWeather(){
     CityFromMongo.find((error, cities) => {
         if (!error) {
             JSON.stringify(cities);

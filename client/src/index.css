@@ -69,6 +69,7 @@ p {
   touch-action: manipulation;
   vertical-align: middle;
   margin-left: 2px;
+  margin-bottom: 6px;
 }
 
 .button-13:hover {
@@ -82,4 +83,7 @@ p {
 }
 button[name=deleteButton]{
   float: right;
+}
+.error-message {
+  color: red;
 }

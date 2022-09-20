@@ -5,14 +5,19 @@ import axios from "axios";
 function App() {
   const [data, setData] = React.useState("");
   const [city, setCity] = React.useState("");
+  const [err, setErr] = React.useState("");
 
   async function postCity(e) {
     e.preventDefault()
     try {
       await axios.post("/post_city", { city })
-      setData(data)
+      .then(res => {
+        setErr(res.data);
+      })
+      setData(data);
     } catch (error) {
-      console.log(error);
+        console.error("error");
+        setErr("Error: "+error);   
     }
   }
 
@@ -34,6 +39,16 @@ function App() {
       .then((res) => res.json())
       .then((data) => setData(data));
   };
+  
+async function updateWeather() {
+  try {
+    setErr("");
+    await axios.post("/update_weather");
+  } catch (error) {
+    console.error(error);
+    setErr("Error: Could not update weather.")
+  }
+  }
 
 
   React.useEffect(() => {
@@ -52,6 +67,8 @@ function App() {
           <input type="text" placeholder="Enter city..." className="search" value={city} onChange={(e) => setCity(e.target.value)} />
           <button type="submit" className="button-13">Add City</button>
         </form></div>
+        <h3 className="error-message">{err}</h3>
+        <button onClick={updateWeather} className="button-13">Update</button>
       <div className="weather">
         {!data ? "Loading..." : data.map(createCurrentWeather)}
       </div>
